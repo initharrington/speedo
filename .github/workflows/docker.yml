@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Clone Repository
         uses: actions/checkout@v2
-      - uses: olegtarasov/get-tag@v2
+      - uses: olegtarasov/get-tag@v2.1
         id: tagName
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -28,6 +28,6 @@ jobs:
           context: .
           file: ./Dockerfile
           tags: |
-            saucelabs/speedo:latest
-            saucelabs/speedo:${{ steps.tagName.outputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/speedo:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/speedo:${{ steps.tagName.outputs.tag }}
           cache_froms: latest
